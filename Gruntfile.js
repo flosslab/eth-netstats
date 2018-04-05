@@ -65,6 +65,8 @@ var styles_lite = [
 	'style.css'
 ];
 
+var config = require('./lib/utils/config');
+
 module.exports = function(grunt) {
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
@@ -80,6 +82,7 @@ module.exports = function(grunt) {
 			build: {
 				options: {
 					data: {
+						title: config.title,
 						debug: false,
 						pretty: true
 					}
@@ -91,6 +94,7 @@ module.exports = function(grunt) {
 			build_lite: {
 				options: {
 					data: {
+						title: config.title,
 						debug: false,
 						pretty: true
 					}
