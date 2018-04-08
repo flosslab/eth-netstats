@@ -65,7 +65,31 @@ var styles_lite = [
 	'style.css'
 ];
 
-var config = require('./lib/utils/config');
+var config;
+try {
+	config = require('./config');
+}
+catch (e)
+{
+	if( e.code === 'MODULE_NOT_FOUND')
+	{
+		console.log("WARNING: No config.js file found. use default config.js found at lib/utils/config.js...");
+	}
+	else
+	{
+		throw e;
+		process.exit(1);
+	}
+
+	try {
+		config = require('./lib/utils/config');
+	}
+	catch (e)
+	{
+		throw e;
+		process.exit(1);
+	}
+}
 
 module.exports = function(grunt) {
 	grunt.initConfig({

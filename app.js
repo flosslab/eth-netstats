@@ -107,7 +107,7 @@ api.on('connection', function (spark)
 	{
 		console.info('API', 'CON', 'Hello', data['id']);
 
-		if( _.isUndefined(data.secret) || WS_SECRET.indexOf(data.secret) === -1 || banned.indexOf(spark.address.ip) >= 0 || _.isUndefined(data.id) || reserved.indexOf(data.id) >= 0 )
+		if( _.isUndefined(data.secret) || WS_SECRET.indexOf(data.secret) === -1 || banned.indexOf(spark.address.ip) >= 0 )
 		{
 			spark.end(undefined, { reconnect: false });
 			console.error('API', 'CON', 'Closed - wrong auth', data);
@@ -197,7 +197,7 @@ api.on('connection', function (spark)
 							data: stats
 						});
 
-						console.success('API', 'BLK', 'Block:', data.block['number'], 'td:', data.block['totalDifficulty'], 'from:', data.id, 'ip:', spark.address.ip);
+						console.success('API', 'BLK', 'Block:', data.block['number'], 'from:', data.id);
 
 						Nodes.getCharts();
 					}
