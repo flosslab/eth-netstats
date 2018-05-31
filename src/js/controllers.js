@@ -153,6 +153,9 @@ netStatsApp.controller('StatsCtrl', function($scope, $filter, $localStorage, soc
 					// Init latency
 					latencyFilter(node);
 
+					// Init pool hashrate percent
+					poolHashrateFilter(node);
+
 					// Init history
 					if( _.isUndefined(data.history) )
 					{
@@ -194,6 +197,9 @@ netStatsApp.controller('StatsCtrl', function($scope, $filter, $localStorage, soc
 
 					if( _.isUndefined(data.stats.hashrate) )
 						data.stats.hashrate = 0;
+
+					if( !_.isUndefined($scope.nodes[index].stats.percent) )
+						data.stats.percent = $scope.nodes[index].stats.percent;
 
 					if( $scope.nodes[index].stats.block.number < data.stats.block.number )
 					{
@@ -280,12 +286,26 @@ netStatsApp.controller('StatsCtrl', function($scope, $filter, $localStorage, soc
 						$scope.nodes[index].stats.peers = data.stats.peers;
 						$scope.nodes[index].stats.gasPrice = data.stats.gasPrice;
 						$scope.nodes[index].stats.uptime = data.stats.uptime;
+						$scope.nodes[index].stats.pool = data.stats.pool;
+						if( $scope.avgHashrate != 0 && typeof $scope.avgHashrate != 'undefined')
+						{
+							data.stats.percent = data.stats.hashrate / $scope.avgHashrate * 100;
+						} else {
+							data.stats.percent = 0;
+						}
 
 						if( !_.isUndefined(data.stats.latency) && _.get($scope.nodes[index], 'stats.latency', 0) !== data.stats.latency )
 						{
 							$scope.nodes[index].stats.latency = data.stats.latency;
 
 							latencyFilter($scope.nodes[index]);
+						}
+
+						if( !_.isUndefined(data.stats.percent) && _.get($scope.nodes[index], 'stats.percent', 0) !== data.stats.percent )
+						{
+							$scope.nodes[index].stats.percent = data.stats.percent;
+
+							poolHashrateFilter($scope.nodes[index]);
 						}
 
 						updateActiveNodes();
@@ -306,6 +326,9 @@ netStatsApp.controller('StatsCtrl', function($scope, $filter, $localStorage, soc
 
 					// Init latency
 					latencyFilter($scope.nodes[index]);
+
+					// Init pool hashrate percent
+					poolHashrateFilter($scope.nodes[index]);
 
 					updateActiveNodes();
 				}
@@ -607,6 +630,48 @@ netStatsApp.controller('StatsCtrl', function($scope, $filter, $localStorage, soc
 	// 		return false;
 	// 	}
 	// }
+
+	function poolHashrateFilter(node)
+	{
+		if( _.isUndefined(node.readable) )
+			node.readable = {};
+
+		node.readable.percentClass = 'text-gray';
+		if( node.stats.hashrate == 0 ) {
+			node.stats.percent = 0;
+		}
+
+		if (node.stats.active === false)
+		{
+			node.readable.percentClass = 'text-gray';
+			node.stats.percent = 'NaN';
+		}
+		else
+		{
+			if (node.stats.percent == 'NaN')
+			{
+				node.readable.percentClass = 'text-gray';
+			}
+			else
+			{
+				if (node.stats.percent <= 48)
+					node.readable.percentClass = 'text-info';
+
+				if (node.stats.percent <= 10)
+					node.readable.percentClass = 'text-success';
+
+				if (node.stats.percent > 48 && node.stats.latency <= 50)
+					node.readable.percentClass = 'text-warning';
+
+				if (node.stats.percent > 50)
+					node.readable.percentClass = 'text-danger';
+			}
+		}
+		if (node.stats.percent > 0 && node.stats.percent != 'NaN')
+		{
+			node.readable.percent = $filter('number')(node.stats.percent) + ' %';
+		}
+	}
 
 	function latencyFilter(node)
 	{
