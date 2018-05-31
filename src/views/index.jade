@@ -191,15 +191,17 @@ block content
               i.icon-clock(data-toggle="tooltip", data-placement="top", title="Node latency", ng-click="orderTable(['stats.latency'], false)")
             th.hidden-xs
               i.icon-mining(data-toggle="tooltip", data-placement="top", title="Is mining", ng-click="orderTable(['-stats.hashrate'], false)")
+            th.hidden-xs
+              i.icon-bulb(data-toggle="tooltip", data-placement="top", title="Percent", ng-click="orderTable(['-stats.hashrate'], false)")
             th
-              i.icon-group(data-toggle="tooltip", data-placement="top", title="Peers", ng-click="orderTable(['-stats.peers'], false)")
+              i.icon-group(data-toggle="tooltip", data-placement="top", title="Miners/Peers", ng-click="orderTable(['-stats.peers'], false)")
             th
               i.icon-network(data-toggle="tooltip", data-placement="top", title="Pending transactions", ng-click="orderTable(['-stats.pending'], false)")
             th.hidden-xs
               i.icon-block(data-toggle="tooltip", data-placement="top", title="Last block", ng-click="orderTable(['-stats.block.number', 'stats.block.propagation'], false)")
             th.th-blockhash.hidden-xs.hidden-sm.hidden-md &nbsp;
-            th.th-blockhash.hidden-xs.hidden-sm.hidden-md
-              i.icon-difficulty(data-toggle="tooltip", data-placement="top", title="Total difficulty", ng-click="orderTable(['-stats.block.totalDifficulty'], false)")
+            th.hidden-xs.hidden-sm.hidden-md
+              i.icon-difficulty(data-toggle="tooltip", data-placement="top", title="Candidates/Immatual or Total difficulty", ng-click="orderTable(['-stats.pool.immatualTotal'], false)")
             th.hidden-xs
               i.icon-check-o(data-toggle="tooltip", data-placement="top", title="Block transactions", ng-click="orderTable(['-stats.block.transactions.length'], false)")
             th.hidden-xs
@@ -227,7 +229,10 @@ block content
             td(class="{{ node.readable.latencyClass }}").hidden-xs
               span.small {{ node.readable.latency }}
             td(class="{{ node.stats.mining | hashrateClass : node.stats.active }}", ng-bind-html="node.stats.hashrate | hashrateFilter : node.stats.mining").hidden-xs
-            td(class="{{ node.stats.peers | peerClass : node.stats.active }}", style="padding-left: 11px;") {{node.stats.peers}}
+            td(class="{{ node.readable.percentClass }}").hidden-xs
+              span.small(ng-if="node.stats.percent != 0") {{ node.readable.percent }}
+            td(class="{{ node.stats.peers | peerClass : node.stats.active }}", style="padding-left: 11px;", ng-if="node.stats.pool.minersTotal") {{node.stats.pool.minersTotal}}/{{node.stats.peers}}
+            td(class="{{ node.stats.peers | peerClass : node.stats.active }}", style="padding-left: 11px;", ng-if="!node.stats.pool.minersTotal") {{node.stats.peers}}
             td(style="padding-left: 15px;") {{node.stats.pending}}
             td(class="{{ node.stats | blockClass : bestBlock }}").hidden-xs
               span(class="{{ node.readable.forkMessage ? node.readable.forkClass : '' }}") {{'#'}}{{ node.stats.block.number | number }}
@@ -236,7 +241,8 @@ block content
             td(class="{{ node.stats | blockClass : bestBlock }}").hidden-xs.hidden-sm.hidden-md
               span.small {{node.stats.block.hash | hashFilter}}
             td(class="{{ node.stats | blockClass : bestBlock }}").hidden-xs.hidden-sm.hidden-md
-              span.small {{node.stats.block.totalDifficulty | number}}
+              span(ng-if="node.stats.pool.nodes").small {{node.stats.pool.candidatesTotal}}/{{node.stats.pool.immatureTotal}}
+              span(ng-if="!node.stats.pool.nodes").small {{node.stats.block.totalDifficulty | number}}
             td(style="padding-left: 14px;").hidden-xs {{node.stats.block.transactions.length || 0}}
             td(style="padding-left: 14px;").hidden-xs {{node.stats.block.uncles.length || 0}}
             td(class="{{ node.stats.block.received | timeClass : node.stats.active }}") {{node.stats.block.received | blockTimeFilter }}
