@@ -1,3 +1,4 @@
+var _ = require('lodash');
 var src = 'src/';
 var dest = 'dist/';
 
@@ -91,6 +92,36 @@ catch (e)
 	}
 }
 
+// default settings
+var settings = {
+	googleFontFamily: "Source Sans Pro",
+	fontFamily: "Source Sans Pro"
+};
+
+_.extend(settings, config.settings);
+
+// setup customCss
+var customCss;
+if (settings.customCss) {
+	customCss = settings.customCss;
+	styles.push(settings.customCss);
+	styles_lite.push(settings.customCss);
+}
+
+var dist_styles = styles.map(function(css) {
+	return `dist/css/${css}`;
+});
+
+var dist_styles_lite = styles_lite.map(function(css) {
+	return `dist-lite/css/${css}`;
+});
+
+// setup logo
+var logo = [];
+if (settings.logoImage) {
+	logo.push(settings.logoImage);
+}
+
 module.exports = function(grunt) {
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
@@ -107,6 +138,7 @@ module.exports = function(grunt) {
 				options: {
 					data: {
 						title: config.title,
+						settings,
 						debug: false,
 						pretty: true
 					}
@@ -142,6 +174,13 @@ module.exports = function(grunt) {
 						expand: true,
 						cwd: 'src/images/',
 						src: ['*.ico'],
+						dest: 'dist/',
+						filter: 'isFile'
+					},
+					{
+						expand: true,
+						cwd: 'src/images/',
+						src: logo,
 						dest: 'dist/',
 						filter: 'isFile'
 					},
@@ -238,7 +277,7 @@ module.exports = function(grunt) {
 				nonull: true
 			},
 			css: {
-				src: ['dist/css/*.min.css', 'dist/css/*.css'],
+				src: ['dist/css/*.min.css', dist_styles],
 				dest: 'dist/css/netstats.min.css'
 			},
 			vendor_lite: {
@@ -268,7 +307,7 @@ module.exports = function(grunt) {
 				nonull: true,
 			},
 			css_lite: {
-				src: ['dist-lite/css/*.min.css', 'dist-lite/css/*.css'],
+				src: ['dist-lite/css/*.min.css', dist_styles_lite],
 				dest: 'dist-lite/css/netstats.min.css'
 			}
 		},

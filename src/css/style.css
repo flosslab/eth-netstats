@@ -101,6 +101,11 @@ table td {
 .big-info span.small-title,
 .big-info div.small-title-miner {
 	display: block;
+	white-space: nowrap;
+}
+
+.logo-block {
+	height: 70px;
 }
 
 span.small-title,
@@ -488,6 +493,10 @@ svg .y.axis .tick:first-child text {
 
 	.big-info .big-details {
 		font-size: 35px;
+	}
+
+	.logo-block {
+		height: 67px;
 	}
 
 	.blocks-holder div.small-title-miner {
