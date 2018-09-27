@@ -513,10 +513,6 @@ svg .y.axis .tick:first-child text {
 		font-size: 18px;
 		margin-right: 0px;
 	}
-
-	.second-row .box {
-		height: 100%; /* BUG XXX */
-	}
 }
 
 
