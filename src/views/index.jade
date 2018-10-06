@@ -245,7 +245,7 @@ block content
               span.small {{node.stats.block.hash | hashFilter}}
             td(class="{{ node.stats | blockClass : bestBlock }}").hidden-xs.hidden-sm.hidden-md
               span(ng-if="node.stats.pool.nodes").small {{node.stats.pool.candidatesTotal}}/{{node.stats.pool.immatureTotal}}
-              span(ng-if="!node.stats.pool.nodes").small {{node.stats.block.totalDifficulty | number}}
+              span(ng-if="!node.stats.pool.nodes").small(ng-bind-html="node.stats.block.totalDifficulty | totalDifficultyFilter")
             td(style="padding-left: 14px;").hidden-xs {{node.stats.block.transactions.length || 0}}
             td(style="padding-left: 14px;").hidden-xs {{node.stats.block.uncles.length || 0}}
             td(class="{{ node.stats.block.received | timeClass : node.stats.active }}") {{node.stats.block.received | blockTimeFilter }}
