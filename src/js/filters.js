@@ -66,7 +66,7 @@ angular.module('netStatsApp.filters', [])
 		var units = ['', 'K', 'M', 'G', 'T', 'P'];
 		var unit = 'K';
 
-		for(var i = 1; result > 1000; i++)
+		for(var i = 1; result > 1000 && i < 6; i++)
 		{
 			result /= 1000;
 			unit = units[i];
@@ -81,7 +81,7 @@ angular.module('netStatsApp.filters', [])
 		var units = ['', 'K', 'M', 'G', 'T', 'P'];
 		var unit = '';
 
-		for(var i = 1; result > 1000; i++)
+		for(var i = 1; result > 1000 && i < 6; i++)
 		{
 			result /= 1000;
 			unit = units[i];
@@ -295,7 +295,7 @@ angular.module('netStatsApp.filters', [])
 		var units = ['', 'K', 'M', 'G', 'T', 'P'];
 		var unit = 'K';
 
-		for(var i = 1; result > 1000; i++)
+		for(var i = 1; result > 1000 && i < 6; i++)
 		{
 			result /= 1000;
 			unit = units[i];
