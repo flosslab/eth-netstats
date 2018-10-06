@@ -175,6 +175,17 @@ angular.module('netStatsApp.filters', [])
 		return hash.substr(0, 8) + '...' + hash.substr(56, 8);
 	}
 })
+.filter('nodeFilter', function() {
+	return function(hash) {
+		if(typeof hash === 'undefined')
+			return "?";
+
+		if(hash.substr(0,2) === '0x')
+			return hash.substr(0, 12) + '...' + hash.substr(32, 10);
+		else
+			return hash;
+	}
+})
 .filter('timeClass', function() {
 	return function(timestamp, active) {
 		if( ! active)
