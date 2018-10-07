@@ -121,9 +121,9 @@ block content
               div.col-xs-6.col-sm-4.col-md-3.stat-holder.xpull-right
                 div.big-info.chart.xdouble-chart
                   span.small-title last blocks miners
-                  div.blocks-holder(ng-repeat='miner in miners track by miner.miner', data-toggle="tooltip", data-placement="right", data-original-title="{{miner.blocks}}")
+                  div.blocks-holder(ng-repeat='miner in miners track by miner.miner', data-toggle="tooltip", data-placement="right", data-original-title="{{miner.miner}}: {{miner.blocks}}")
                     //- div.small-title-miner {{miner.miner | minerNameFilter : miner.name}}
-                    div.small-title-miner {{miner.miner | nodeFilter}}
+                    div.small-title-miner(ng-hide="miners.length > 2") {{miner.miner | nodeFilter}}
                     div.block-count(class="{{miner.blocks | minerBlocksClass : 'text-'}}") {{miner.blocks}}
                     minerblock(blocks="{{miner.blocks}}")
                     div.clearfix

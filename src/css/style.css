@@ -169,7 +169,7 @@ span.small-title span.small {
 
 .blocks-holder {
 	width: 288px;
-	padding-top: 6px;
+	padding-top: 1px;
 	margin-left: -2px;
 	display: table;
 	margin: 0 auto;
@@ -193,7 +193,7 @@ span.small-title span.small {
 	font-family: 'Lucida Console', "Courier New", Courier, monospace;
 	font-weight: bold;
 	font-size: 10px;
-	padding-top: 3px;
+	padding-top: 1px;
 	float: right;
 }
 
