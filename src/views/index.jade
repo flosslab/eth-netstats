@@ -27,7 +27,7 @@ block content
       div.col-xs-6.col-sm-6.col-md-6.col-lg-2.stat-holder
         div.big-info.blocktime(class="{{ lastBlock | timeClass : true }}")
           div.pull-left.icon-full-width
-            i.icon-time
+            i.icon-clock
           div.big-details-holder
             span.small-title last block
             span.big-details {{ lastBlock | blockTimeFilter }}
@@ -36,7 +36,7 @@ block content
       div.col-xs-6.col-sm-6.col-md-6.col-lg-2.stat-holder
         div.big-info.avgblocktime(class="{{ avgBlockTime | avgTimeClass }}")
           div.pull-left.icon-full-width
-            i.icon-gas
+            i.icon-time
           div.big-details-holder
             span.small-title avg block time
             span.big-details {{ avgBlockTime | avgTimeFilter }}
@@ -44,7 +44,7 @@ block content
       div.col-xs-6.col-sm-6.col-md-6.col-lg-2.stat-holder
         div.big-info.difficulty.text-orange
           div.pull-left.icon-full-width
-            i.icon-hashrate
+            i.icon-gas
           div.big-details-holder
             span.small-title
               span.hidden-xs avg&nbsp;
