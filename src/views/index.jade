@@ -88,11 +88,16 @@ block content
               span.small-title page latency
               span.small-value {{latency}} ms
           div.col-xs-6.col-sm-6.col-md-6.col-lg-2.stat-holder.box
+            div.propagation(class="{{ {active: true, latency: latency} | latencyClass }}")
+              i.icon-clock
+              span.small-title propagation&nbsp;
+                span.hidden-xs avg
+              span.small-value {{ propagationAvg }} ms
+          div.col-xs-6.col-sm-6.col-md-6.col-lg-2.stat-holder.box
             div.uptime(class="{{ upTimeTotal | upTimeClass : true }}")
               i.icon-bulb
               span.small-title uptime
               span.small-value {{ upTimeTotal | upTimeFilter }}
-          div.col-xs-6.col-sm-6.col-md-6.col-lg-2.stat-holder.box
 
         div.row
           div.col-xs-12.col-sm-12.col-md-12.col-lg-8

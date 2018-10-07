@@ -252,6 +252,11 @@ netStatsApp.controller('StatsCtrl', function($scope, $filter, $localStorage, soc
 
 					$scope.nodes[index].stats.block = data.block;
 					$scope.nodes[index].stats.propagationAvg = data.propagationAvg;
+					var avg = 0;
+					_.forEach($scope.nodes, function (node) {
+						avg += node.stats.block.propagation;
+					});
+					$scope.propagationAvg = (avg / $scope.nodes.length).toFixed(0);
 
 					updateBestBlock();
 				}
