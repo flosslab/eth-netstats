@@ -80,7 +80,9 @@ block content
           div.col-xs-6.col-sm-6.col-md-6.col-lg-2.stat-holder.box
             div.gasprice.text-info
               i.icon-gasprice
-              span.small-title gas limit
+              span.small-title
+                span.hidden-xs gas&nbsp;
+                | limit
               span.small-value {{ bestStats.block.gasLimit | number }} gas
           div.col-xs-6.col-sm-6.col-md-6.col-lg-2.stat-holder.box
             div.page-latency(class="{{ {active: true, latency: latency} | latencyClass }}")
