@@ -3,6 +3,8 @@ doctype html
 html(ng-app="netStatsApp")
   head
     meta(name="viewport", content="width=device-width, initial-scale=1.0, maximum-scale=1.0")
+    if settings.themeColor
+      meta(name="theme-color", content="#{settings.themeColor}")
     title #{title}
     style(type="text/css") [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak { display: none !important; }
     link(rel='stylesheet', href='//fonts.googleapis.com/css?family=#{settings.googleFontFamily}:200,300,400,600,700')
