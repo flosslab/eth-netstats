@@ -149,24 +149,24 @@ angular.module('netStatsApp.directives', [])
 					if(ms < 1000) {
 						return ms + " ms";
 					}
+					ms /= 1000;
 
-					if(ms < 1000*60) {
-						result = ms/1000;
-						return result.toFixed(1) + " s";
+					if(ms < 60) {
+						return ms.toFixed(1) + " s";
 					}
+					ms /= 60;
 
-					if(ms < 1000*60*60) {
-						result = ms/1000/60;
-						return Math.round(result) + " min";
+					if(ms < 60) {
+						return Math.round(ms) + " min";
 					}
+					ms /= 60;
 
-					if(ms < 1000*60*60*24) {
-						result = ms/1000/60/60;
-						return Math.round(result) + " h";
+					if(ms < 24) {
+						return Math.round(ms) + " h";
 					}
+					ms /= 24;
 
-					result = ms/1000/60/60/24;
-					return Math.round(result) + " days";
+					return Math.round(ms) + " days";
 				};
 
 				return function(scope, element, attrs)
