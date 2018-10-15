@@ -220,7 +220,6 @@ block content
               i.icon-time(data-toggle="tooltip", data-placement="top", title="Last block time", ng-click="orderTable(['-stats.block.received'], false)")
             th.th-peerPropagationTime
               i.icon-gas(data-toggle="tooltip", data-placement="top", title="Propagation time", ng-click="orderTable(['-stats.block.number', 'stats.block.propagation'], false)")
-            th.th-peerPropagationChart
             th.th-peerPropagationAvg.hidden-xs
               i.icon-gas(data-toggle="tooltip", data-placement="top", title="Average propagation time", ng-click="orderTable(['stats.propagationAvg'], false)")
             th.hidden-xs
@@ -257,9 +256,10 @@ block content
             td(style="padding-left: 14px;").hidden-xs {{node.stats.block.uncles.length || 0}}
             td(class="{{ node.stats.block.received | timeClass : node.stats.active }}") {{node.stats.block.received | blockTimeFilter }}
             td(class="{{ node.stats | propagationTimeClass : bestBlock }}")
-              div.propagationBox
-              span {{node.stats.block.propagation | blockPropagationFilter}}
-            td.peerPropagationChart(class="{{node.id}}")
-              nodepropagchart(data="{{node.history.join(',')}}")
+              div.peerPropagationChart(style="position:absolute;")
+                div.propagationBox
+                span(style="position:absolute;") {{node.stats.block.propagation | blockPropagationFilter}}
+              div.peerPropagationChart(class="{{node.id}}")
+                nodepropagchart(data="{{node.history.slice(15).join(',')}}")
             td(class="{{ node.stats | propagationNodeAvgTimeClass : bestBlock }}").hidden-xs {{ node.stats | blockPropagationAvgFilter : bestBlock }}
             td(class="{{ node.stats.uptime | upTimeClass : node.stats.active }}").hidden-xs {{ node.stats.uptime | upTimeFilter }}
