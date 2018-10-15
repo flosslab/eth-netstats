@@ -7,6 +7,11 @@ body {
 	font-smooth: auto;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	background-color: #121312;
+}
+
+table {
+	border-collapse: separate;
 }
 
 table td {
@@ -79,8 +84,11 @@ table td {
 }
 
 .stat-holder {
-	background: #090909;
-	border: 1px solid rgba(255,255,255,0.05);
+	background: #121312;
+	border-left: 1px solid #191818;
+	border-right: 1px solid #080808;
+	border-top: 1px solid #1d1c1c;
+	border-bottom: 1px solid #0a0a0a;
 }
 
 .big-info {
@@ -102,6 +110,7 @@ table td {
 .big-info div.small-title-miner {
 	display: block;
 	white-space: nowrap;
+	text-align: right;
 }
 
 .logo-block {
@@ -111,9 +120,9 @@ table td {
 span.small-title,
 div.small-title-miner {
 	font-weight: 700;
-	font-size: 14px;
+	font-size: 12px;
 	line-height: 20px;
-	letter-spacing: 1px;
+	letter-spacing: 0;
 	text-transform: uppercase;
 	color: #aaa;
 }
@@ -135,6 +144,7 @@ span.small-title span.small {
 	line-height: 55px;
 	letter-spacing: -4px;
 	word-spacing: nowrap !important;
+	text-align: right;
 }
 
 .big-info .big-details .small-hash {
@@ -144,7 +154,7 @@ span.small-title span.small {
 .big-info .big-details-holder {
 	position: absolute;
 	top: 15px;
-	left: 99px;
+	right: 15px;
 }
 
 .big-info.chart {
@@ -168,7 +178,7 @@ span.small-title span.small {
 }
 
 .blocks-holder {
-	width: 288px;
+	width: 100%;
 	padding-top: 1px;
 	margin-left: -2px;
 	display: table;
@@ -262,6 +272,9 @@ table i {
 table th,
 table td {
 	border-color: #222 !important;
+
+	border-top: 1px solid #212121!important;
+	border-bottom: 1px solid #0a0a0a!important;
 }
 
 table td {
@@ -289,6 +302,15 @@ nodepropagchart {
 	width: 107px;
 	height: 20px;
 	vertical-align: top;
+}
+
+.table {
+	border-left: 1px solid #1b1b1b;
+	border-right: 1px solid #020202;
+}
+
+.table-striped>tbody>tr:nth-child(odd) {
+	background-color: #21212154;
 }
 
 .table>tbody>tr>td,
@@ -484,19 +506,20 @@ svg .y.axis .tick:first-child text {
 		width: 75px;
 		height: 67px;
 		font-size: 67px;
-		margin-left: -25px;
+		opacity: 0.4;
 	}
 
 	.big-info .big-details-holder {
-		left: 75px;
+		left: 0;
 	}
 
 	.big-info .big-details {
-		font-size: 35px;
+		font-size: 40px;
 	}
 
 	.logo-block {
 		height: 67px;
+		opacity: 0.3;
 	}
 
 	.blocks-holder div.small-title-miner {
